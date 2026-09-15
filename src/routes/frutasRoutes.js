@@ -1,5 +1,3 @@
-
-
 // Listar todas as frutas
 router.get("/", async (req, res) => {
     try {
