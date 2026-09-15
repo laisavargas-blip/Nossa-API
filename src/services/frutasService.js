@@ -1,4 +1,4 @@
-const pool = require("../database/connection");
+import { pool} from "../database/connection.js";
 
 async function listarFrutas() {
     const resultado = await pool.query("SELECT * FROM frutas");
