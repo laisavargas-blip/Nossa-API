@@ -1,4 +1,5 @@
-import { Pool } from "pg";
+import pg from 'pg';
 import 'dotenv/config';
 
-export const pool = new Pool();
+// Instância o pool de conexões usando as variáveis do .env
+export const pool = new pg.Pool();

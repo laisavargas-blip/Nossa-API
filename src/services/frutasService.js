@@ -1,31 +1,20 @@
-import { pool} from "../database/connection.js";
+import { pool } from '../database/connection.js';
 
-async function listarFrutas() {
-    const resultado = await pool.query("SELECT * FROM frutas");
-    return resultado.rows;
-}
+class FrutaService {
+  // Busca todas as frutas no banco
+  async listarTodas() {
+    const res = await pool.query('SELECT * FROM frutas ORDER BY nome');
+    return res.rows;
+  }
 
-async function buscarFruta(id) {
-    const resultado = await pool.query(
-        "SELECT * FROM frutas WHERE id = $1",
-        [id]
+  // Cadastra uma nova fruta com parâmetros seguros ($1, $2...)
+  async criar({ nome, tipo, preco, quantidade }) {
+    const res = await pool.query(
+      'INSERT INTO frutas (nome, tipo, preco, quantidade) VALUES ($1, $2, $3, $4) RETURNING *',
+      [nome, tipo, preco, quantidade]
     );
-    return resultado.rows[0];
+    return res.rows[0];
+  }
 }
 
-async function criarFruta(nome, tipo, preco, quantidade) {
-    const resultado = await pool.query(
-        `INSERT INTO frutas (nome, tipo, preco, quantidade)
-         VALUES ($1, $2, $3, $4)
-         RETURNING *`,
-        [nome, tipo, preco, quantidade]
-    );
-
-    return resultado.rows[0];
-}
-
-module.exports = {
-    listarFrutas,
-    buscarFruta,
-    criarFruta
-};
+export default new FrutaService();
