@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import frutaService from '../services/frutaService.js';
+import frutaService from '../services/frutasService.js';
 
 const router = Router();
 
