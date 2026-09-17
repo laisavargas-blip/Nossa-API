@@ -24,7 +24,7 @@ async function criarFruta(nome, tipo, preco, quantidade) {
     return resultado.rows[0];
 }
 
-module.exports = {
+export {
     listarFrutas,
     buscarFruta,
     criarFruta
